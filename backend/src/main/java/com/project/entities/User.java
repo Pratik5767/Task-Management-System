@@ -1,5 +1,6 @@
 package com.project.entities;
 
+import com.project.dto.UserDto;
 import com.project.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -52,5 +53,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserDto getUserDto() {
+        UserDto userDto = new UserDto();
+        userDto.setId(id);
+        userDto.setName(name);
+        userDto.setEmail(email);
+        userDto.setUserRole(userRole);
+        return userDto;
     }
 }

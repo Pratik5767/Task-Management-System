@@ -1,5 +1,7 @@
 package com.project.services.auth;
 
+import com.project.dto.SignUpRequest;
+import com.project.dto.UserDto;
 import com.project.entities.User;
 import com.project.enums.UserRole;
 import com.project.repositories.UserRepository;
@@ -31,5 +33,21 @@ public class AuthServiceImpl implements AuthService {
         } else {
             System.out.println("Admin already exists");
         }
+    }
+
+    @Override
+    public UserDto signUpUser(SignUpRequest signUpRequest) {
+        User user = new User();
+        user.setName(signUpRequest.getName());
+        user.setEmail(signUpRequest.getEmail());
+        user.setPassword(new BCryptPasswordEncoder().encode(signUpRequest.getPassword()));
+        user.setUserRole(UserRole.EMPLOYEE);
+        User createUser = userRepository.save(user);
+        return createUser.getUserDto();
+    }
+
+    @Override
+    public boolean hasUserWithEmail(String email) {
+        return userRepository.findFirstByEmail(email).isPresent();
     }
 }
