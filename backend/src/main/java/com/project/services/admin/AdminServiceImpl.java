@@ -21,6 +21,7 @@ public class AdminServiceImpl implements AdminService {
         return userRepository.findAll()
                 .stream()
                 .filter(user -> user.getUserRole() == UserRole.EMPLOYEE)
-                .map(User::getUserDto).collect(Collectors.toList());
+                .map(User::getUserDto)
+                .collect(Collectors.toList());
     }
 }
