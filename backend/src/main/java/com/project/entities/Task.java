@@ -1,9 +1,8 @@
-package com.project.enums;
+package com.project.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.dto.TaskDto;
-import com.project.entities.TaskStatus;
-import com.project.entities.User;
+import com.project.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;

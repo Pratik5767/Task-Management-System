@@ -1,6 +1,6 @@
 package com.project.dto;
 
-import com.project.entities.TaskStatus;
+import com.project.enums.TaskStatus;
 import lombok.Data;
 
 import java.util.Date;
