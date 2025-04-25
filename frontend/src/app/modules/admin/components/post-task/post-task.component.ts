@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-post-task',
@@ -15,7 +17,10 @@ export class PostTaskComponent {
 
     constructor(
         private adminService: AdminService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private snakBar: MatSnackBar,
+        private router: Router
+
     ) {
         this.getUsers();
         this.taskForm = this.fb.group({
@@ -36,5 +41,13 @@ export class PostTaskComponent {
 
     postTask() {
         console.log(this.taskForm.value);
+        this.adminService.postTask(this.taskForm.value).subscribe((res) => {
+            if (res.id != null) {
+                this.snakBar.open("Task Posted Successfully", "Close", { duration: 5000 });
+                this.router.navigateByUrl("/admin/dashboard");
+            } else {
+                this.snakBar.open("Something went wrong", "Error", { duration: 5000 })
+            }
+        })
     }
 }

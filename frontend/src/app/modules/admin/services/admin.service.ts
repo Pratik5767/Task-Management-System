@@ -12,8 +12,14 @@ export class AdminService {
 
     constructor(private http: HttpClient) { }
 
-    getUsers():Observable<any> {
+    getUsers(): Observable<any> {
         return this.http.get(BASIC_URL + "api/admin/users", {
+            headers: this.createAuthorizationHeader()
+        })
+    }
+
+    postTask(taskDto: any): Observable<any> {
+        return this.http.post(BASIC_URL + "api/admin/task", taskDto, {
             headers: this.createAuthorizationHeader()
         })
     }
